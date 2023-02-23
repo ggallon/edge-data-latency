@@ -3,9 +3,9 @@ import { useCallback, useState } from 'react';
 import { Dropdown, DropdownItem } from '@tremor/react';
 import {
   ShoppingCartIcon,
-  DatabaseIcon,
-  LightningBoltIcon,
-} from '@heroicons/react/solid';
+  CircleStackIcon,
+  BoltIcon,
+} from '@heroicons/react/20/solid';
 
 const ATTEMPTS = 10;
 
@@ -91,7 +91,7 @@ export default function Page() {
           <div className="py-1 inline-flex">
             <Dropdown
               defaultValue="grafbase"
-              handleSelect={(v) => setDataService(v)}
+              onValueChange={(v) => setDataService(v)}
               maxWidth="max-w-xs"
             >
               <DropdownItem
@@ -102,7 +102,7 @@ export default function Page() {
               <DropdownItem
                 value="planetscale"
                 text="PlanetScale (Kysely + Serverless SDK)"
-                icon={DatabaseIcon}
+                icon={CircleStackIcon}
               />
               <DropdownItem
                 value="shopify"
@@ -112,7 +112,7 @@ export default function Page() {
               <DropdownItem
                 value="supabase"
                 text="Supabase (supabase-js)"
-                icon={LightningBoltIcon}
+                icon={BoltIcon}
               />
               <DropdownItem
                 value="fauna"
