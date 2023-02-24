@@ -39,6 +39,9 @@ export default async function api(req: Request) {
       .execute();
   }
 
+  console.log("invocationRegion(full): ", req.headers.get("x-vercel-id"))
+  console.log("invocationRegion([":"]): ", (req.headers.get("x-vercel-id") ?? "").split(":")[1] || null)
+  console.log("invocationRegion(["::"): ", (req.headers.get("x-vercel-id") ?? "").split("::")[1] || null)
   return Response.json(
     {
       data,
