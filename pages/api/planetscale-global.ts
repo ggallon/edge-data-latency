@@ -18,9 +18,9 @@ interface Database {
 
 const db = new Kysely<Database>({
   dialect: new PlanetScaleDialect({
-    host: process.env.DATABASE_HOST,
-    username: process.env.DATABASE_USERNAME,
-    password: process.env.DATABASE_PASSWORD,
+    host: process.env.PSCALE_DB_HOST,
+    username: process.env.PSCALE_DB_USERNAME,
+    password: process.env.PSCALE_DB_PASSWORD,
   }),
 });
 
