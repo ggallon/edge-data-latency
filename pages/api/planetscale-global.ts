@@ -62,9 +62,9 @@ function toNumber(queryParam: string | null, min = 1, max = 5) {
 }
 
 function findRegion(vercelId: string | null) {
-  const numb = (temp.match(/::/g) || []).length;
+  const count = (vercelId.match(/::/g) || []).length;
 
-  switch(numb) {
+  switch(count) {
     case 1:
       return vercelId.split("::")[0];
       break;
