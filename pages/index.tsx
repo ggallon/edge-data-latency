@@ -15,7 +15,7 @@ export default function Page() {
   const [shouldTestGlobal, setShouldTestGlobal] = useState(true);
   const [shouldTestRegional, setShouldTestRegional] = useState(true);
   const [queryCount, setQueryCount] = useState(1);
-  const [dataService, setDataService] = useState('grafbase');
+  const [dataService, setDataService] = useState('planetscale');
   const [data, setData] = useState({
     regional: [],
     global: [],
@@ -92,7 +92,7 @@ export default function Page() {
 
           <div className="py-1 inline-flex">
             <Dropdown
-              defaultValue="planetscale"
+              defaultValue={dataService}
               onValueChange={(v) => setDataService(v)}
               maxWidth="max-w-xs"
             >
