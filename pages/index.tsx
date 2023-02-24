@@ -92,7 +92,7 @@ export default function Page() {
 
           <div className="py-1 inline-flex">
             <Dropdown
-              defaultValue="grafbase"
+              defaultValue="planetscale"
               onValueChange={(v) => setDataService(v)}
               maxWidth="max-w-xs"
             >

@@ -1,6 +1,8 @@
 import { Kysely } from "kysely";
 import { PlanetScaleDialect } from "kysely-planetscale";
 import { NextRequest as Request, NextResponse as Response } from "next/server";
+import { findRegion } from "@/utils/find-region";
+import { toNumber } from "@/utils/to-number";
 
 export const config = {
   runtime: "edge",
@@ -52,26 +54,4 @@ export default async function api(req: Request) {
       },
     }
   );
-}
-
-// convert a query parameter to a number
-// also apply a min and a max
-function toNumber(queryParam: string | null, min = 1, max = 5) {
-  const num = Number(queryParam);
-  return Number.isNaN(num) ? null : Math.min(Math.max(num, min), max);
-}
-
-function findRegion(vercelId: string | null) {
-  const count = (vercelId.match(/::/g) || []).length;
-
-  switch(count) {
-    case 1:
-      return vercelId.split("::")[0];
-      break;
-    case 2:
-      return vercelId.split("::")[1];
-      break;
-    default:
-      return null
-  }
 }
