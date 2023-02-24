@@ -39,16 +39,12 @@ export default async function api(req: Request) {
       .execute();
   }
 
-  console.log("invocationRegion(full): ", req.headers.get("x-vercel-id"))
-  console.log("invocationRegion([:]): ", (req.headers.get("x-vercel-id") ?? "").split(":")[1] || null)
-  console.log("invocationRegion([::): ", (req.headers.get("x-vercel-id") ?? "").split("::")[1] || null)
   return Response.json(
     {
       data,
       queryDuration: Date.now() - time,
       invocationIsCold: start === time,
-      invocationRegion:
-        (req.headers.get("x-vercel-id") ?? "").split(":")[1] || null,
+      invocationRegion: findRegion(req.headers.get("x-vercel-id") ?? "")
     },
     {
       headers: {
@@ -63,4 +59,19 @@ export default async function api(req: Request) {
 function toNumber(queryParam: string | null, min = 1, max = 5) {
   const num = Number(queryParam);
   return Number.isNaN(num) ? null : Math.min(Math.max(num, min), max);
+}
+
+function findRegion(vercelId: string | null) {
+  const numb = (temp.match(/::/g) || []).length;
+
+  switch(numb) {
+    case 1:
+      return vercelId.split("::")[0];
+      break;
+    case 2:
+      return vercelId.split("::")[1];
+      break;
+    default:
+      return null
+  }
 }

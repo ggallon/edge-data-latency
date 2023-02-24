@@ -159,7 +159,7 @@ export default function Page() {
                 checked={shouldTestRegional}
                 onChange={(e) => setShouldTestRegional(e.target.checked)}
               />{' '}
-              Test regional (IAD) function
+              Test regional [fra1](Frankfurt, Germany) function
             </label>
           </p>
         </div>
