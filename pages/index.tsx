@@ -1,6 +1,5 @@
-import { Button, Card, Title, AreaChart, ColGrid, Text } from '@tremor/react';
 import { useCallback, useState } from 'react';
-import { Dropdown, DropdownItem } from '@tremor/react';
+import { AreaChart, Badge, Button, Card, ColGrid, Dropdown, DropdownItem, Text, Title } from '@tremor/react';
 import {
   ShoppingCartIcon,
   CircleStackIcon,
@@ -72,14 +71,17 @@ export default function Page() {
   }, [runTest, queryCount, dataService, shouldTestGlobal, shouldTestRegional]);
 
   return (
-    <main className="p-6 max-w-5xl flex flex-col gap-3">
-      <h1 className="text-2xl font-bold">Edge &lt;&gt; Data latency</h1>
-      <p>
+    <main className="max-w-5xl p-6 sm:p-10 mx-auto">
+      <div className="flex justify-start items-center gap-2">
+        <Title>Edge &lt;&gt; Data latency</Title>
+        <Badge text="BETA" size="xs" color="red" />
+      </div>
+      <Text>
         This demo helps observe the latency characteristics of querying
         different popular data services from varying compute locations.
-      </p>
+      </Text>
 
-      <form className="flex flex-col gap-5 bg-gray-100 p-5 my-5">
+      <form className="flex flex-col gap-5 bg-gray-100 p-5 my-5 rounded-xl">
         <div className="flex flex-col gap-1">
           <p className="font-bold">Data service</p>
           <p className="text-gray-500 text-sm">
