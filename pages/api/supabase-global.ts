@@ -1,5 +1,8 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextRequest as Request, NextResponse as Response } from "next/server";
+import { findRegion } from "@/utils/find-region";
+import { toNumber } from "@/utils/to-number";
+import type { Database} from "@/types/supabase"
 
 export const config = {
   runtime: "edge",
@@ -19,11 +22,10 @@ export default async function api(req: Request) {
   let data = null;
   for (let i = 0; i < count; i++) {
     const response = await supabase
-      .from("employee_table")
+      .from("employees")
       .select("emp_no,first_name,last_name")
       .limit(10);
     data = response.data;
-    console.log(data);
   }
 
   return Response.json(
@@ -31,8 +33,7 @@ export default async function api(req: Request) {
       data,
       queryDuration: Date.now() - time,
       invocationIsCold: start === time,
-      invocationRegion:
-        (req.headers.get("x-vercel-id") ?? "").split(":")[1] || null,
+      invocationRegion: findRegion(req.headers.get("x-vercel-id") ?? "")
     },
     {
       headers: {
@@ -40,51 +41,4 @@ export default async function api(req: Request) {
       },
     }
   );
-}
-
-// convert a query parameter to a number
-// also apply a min and a max
-function toNumber(queryParam: string | null, min = 1, max = 5) {
-  const num = Number(queryParam);
-  return Number.isNaN(num) ? null : Math.min(Math.max(num, min), max);
-}
-
-// Auto generated types: https://supabase.com/docs/guides/api/generating-types
-interface Database {
-  public: {
-    Tables: {
-      employee_table: {
-        Row: {
-          emp_no: number;
-          first_name: string | null;
-          inserted_at: string;
-          last_name: string | null;
-          updated_at: string;
-        };
-        Insert: {
-          emp_no?: number;
-          first_name?: string | null;
-          inserted_at?: string;
-          last_name?: string | null;
-          updated_at?: string;
-        };
-        Update: {
-          emp_no?: number;
-          first_name?: string | null;
-          inserted_at?: string;
-          last_name?: string | null;
-          updated_at?: string;
-        };
-      };
-    };
-    Views: {
-      [_ in never]: never;
-    };
-    Functions: {
-      [_ in never]: never;
-    };
-    Enums: {
-      [_ in never]: never;
-    };
-  };
 }
