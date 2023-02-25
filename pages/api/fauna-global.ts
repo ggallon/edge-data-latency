@@ -1,4 +1,6 @@
 import { NextRequest as Request, NextResponse as Response } from "next/server";
+import { findRegion } from "@/utils/find-region";
+import { toNumber } from "@/utils/to-number";
 
 export const config = {
   runtime: "edge",
@@ -18,15 +20,17 @@ export default async function api(req: Request) {
         method: "POST",
         headers: {
           "content-type": "application/json",
-          "x-api-key": process.env.FAUNA_API_KEY,
+          "authorization": `Bearer ${process.env.FAUNA_API_KEY}`,
         },
         body: JSON.stringify({
           query: `{
             listEmployees(_size: 10) {
               data {
-                name
-                email
-                position
+                emp_no: _id
+                first_name
+                last_name
+                inserted_at: _ts
+                update_at: _ts
               }
             }
           }`,
@@ -40,8 +44,7 @@ export default async function api(req: Request) {
       data,
       queryDuration: Date.now() - time,
       invocationIsCold: start === time,
-      invocationRegion:
-        (req.headers.get("x-vercel-id") ?? "").split(":")[1] || null,
+      invocationRegion: findRegion(req.headers.get("x-vercel-id") ?? "")
     },
     {
       headers: {
@@ -50,30 +53,3 @@ export default async function api(req: Request) {
     }
   );
 }
-
-// convert a query parameter to a number
-// also apply a min and a max
-function toNumber(queryParam: string | null, min = 1, max = 5) {
-  const num = Number(queryParam);
-  return Number.isNaN(num) ? null : Math.min(Math.max(num, min), max);
-}
-
-/**
- * You can use the following schema for your FaunaDB database
- * 
-
-type Employee {
-  name: String!
-  email: String!
-  phone: String!
-  address: String!
-  position: String!
-  salary: Float!
-}
-
-type Query {
-  listEmployees: [Employee]
-}
-
- */
-

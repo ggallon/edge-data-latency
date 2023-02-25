@@ -1,0 +1,10 @@
+type Employee {
+  first_name: String!
+  last_name: String!
+  inserted_at: Time!
+  update_at: Time!
+}
+
+type Query {
+  listEmployees: [Employee]
+}
