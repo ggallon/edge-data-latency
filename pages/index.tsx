@@ -97,7 +97,7 @@ export default function Page() {
     }
 
     setIsTestRunning(false);
-  }, [runTest, queryCount, dataService, shouldTestGlobal, shouldTestRegional, shouldTestServerless]);
+  }, [runTest, runTestServer, queryCount, dataService, shouldTestGlobal, shouldTestRegional, shouldTestServerless]);
 
   return (
     <main className="max-w-5xl p-6 sm:p-10 mx-auto">
