@@ -4,6 +4,9 @@ import { NextApiRequest as Request, NextApiResponse as Response  } from 'next'
 import { findRegion } from "@/utils/find-region";
 import { toNumber } from "@/utils/to-number";
 
+const AWS_LAMBDA_FUNCTION_VERSION = process.env.AWS_LAMBDA_FUNCTION_VERSION ?? ""
+const VERCEL_REGION process.env.VERCEL_REGION ?? ""
+
 interface EmployeeTable {
   emp_no: number;
   first_name: string;
@@ -23,9 +26,17 @@ const db = new Kysely<Database>({
 });
 
 const start = Date.now();
+let coldStart = true;
+let invocation_count = 0
 
 export default async function api(req: Request, res: Response) {
   const time = Date.now();
+  invocation_count += 1
+  let now = coldStart
+  if (coldStart) {
+    console.log("First time the handler was called since this function was deployed in this container");
+  }
+  coldStart = false;
 
   const count = req.query?.count as string;
   const countNumber = toNumber(count) ?? 0
@@ -44,9 +55,9 @@ export default async function api(req: Request, res: Response) {
     data,
     queryDuration: Date.now() - time,
     invocationIsCold: start === time,
-    invocationRegion: process.env.VERCEL_REGION ?? "",
-    test: findRegion(req.headers["x-vercel-id"] as string ?? ""),
-    headers: req.headers,
-    env: JSON.stringify(process.env, null, 2)
+    invocationIsColdStart: [coldStart, now, invocation_count],
+    invocationLambdaVersion: AWS_LAMBDA_FUNCTION_VERSION,
+    invocationRegion: VERCEL_REGION,
+    vercel: findRegion(req.headers["x-vercel-id"] as string ?? ""),
   })
 }
