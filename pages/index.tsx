@@ -14,9 +14,11 @@ export default function Page() {
   const [isTestRunning, setIsTestRunning] = useState(false);
   const [shouldTestGlobal, setShouldTestGlobal] = useState(true);
   const [shouldTestRegional, setShouldTestRegional] = useState(true);
+  const [shouldTestServerless, setShouldTestServerless] = useState(true);
   const [queryCount, setQueryCount] = useState(1);
   const [dataService, setDataService] = useState('planetscale');
   const [data, setData] = useState({
+    serverless: [],
     regional: [],
     global: [],
   });
@@ -42,13 +44,39 @@ export default function Page() {
     []
   );
 
+  const runTestServer = useCallback(
+    async (dataService: string, type: Region, queryCount: number) => {
+      try {
+        const start = Date.now();
+        const res = await fetch(
+          `/api/${dataService}/${type}/serverless?count=${queryCount}`
+        );
+        const data = await res.json();
+        const end = Date.now();
+        return {
+          ...data,
+          elapsed: end - start,
+        };
+      } catch (e) {
+        // instead of retrying we just give up
+        return null;
+      }
+    },
+    []
+  );
+
   const onRunTest = useCallback(async () => {
     setIsTestRunning(true);
-    setData({ regional: [], global: [] });
+    setData({ serverless: [], regional: [], global: [] });
 
     for (let i = 0; i < ATTEMPTS; i++) {
+      let serverlessValue = null;
       let regionalValue = null;
       let globalValue = null;
+
+      if (shouldTestServerless) {
+        serverlessValue = await runTestServer(dataService, 'regional', queryCount);
+      }
 
       if (shouldTestRegional) {
         regionalValue = await runTest(dataService, 'regional', queryCount);
@@ -61,6 +89,7 @@ export default function Page() {
       setData((data) => {
         return {
           ...data,
+          serverless: [...data.serverless, serverlessValue],
           regional: [...data.regional, regionalValue],
           global: [...data.global, globalValue],
         };
@@ -68,7 +97,7 @@ export default function Page() {
     }
 
     setIsTestRunning(false);
-  }, [runTest, queryCount, dataService, shouldTestGlobal, shouldTestRegional]);
+  }, [runTest, queryCount, dataService, shouldTestGlobal, shouldTestRegional, shouldTestServerless]);
 
   return (
     <main className="max-w-5xl p-6 sm:p-10 mx-auto">
@@ -159,7 +188,18 @@ export default function Page() {
                 checked={shouldTestRegional}
                 onChange={(e) => setShouldTestRegional(e.target.checked)}
               />{' '}
-              Test regional [fra1](Frankfurt, Germany) function
+              Test regional [fra1] edge function
+            </label>
+            <label className="flex items-center gap-2 whitespace-nowrap">
+              <input
+                type="checkbox"
+                disabled
+                name="serverless"
+                value="serverless"
+                checked={shouldTestServerless}
+                onChange={(e) => setShouldTestRegional(e.target.checked)}
+              />{' '}
+              Test regional [fra1] serverless function
             </label>
           </p>
         </div>
@@ -211,7 +251,7 @@ export default function Page() {
           </Button>
         </div>
 
-        {data.regional.length || data.global.length ? (
+        {data.serverless.length || data.regional.length || data.global.length ? (
           <ColGrid numCols={1} numColsMd={2} gapX="gap-x-5" gapY="gap-y-5">
             <Card>
               <Title truncate={true}>
@@ -227,6 +267,9 @@ export default function Page() {
                 data={new Array(ATTEMPTS).fill(0).map((_, i) => {
                   return {
                     attempt: `#${i + 1}`,
+                    Serverless: data.serverless[i]
+                      ? data.serverless[i].queryDuration
+                      : null,
                     Regional: data.regional[i]
                       ? data.regional[i].queryDuration
                       : null,
@@ -236,8 +279,8 @@ export default function Page() {
                   };
                 })}
                 dataKey="attempt"
-                categories={['Global', 'Regional']}
-                colors={['indigo', 'cyan']}
+                categories={['Global', 'Regional', 'Serverless']}
+                colors={['indigo', 'cyan', 'yellow']}
                 valueFormatter={dataFormatter}
                 marginTop="mt-6"
                 yAxisWidth="w-12"
@@ -256,6 +299,9 @@ export default function Page() {
                 data={new Array(ATTEMPTS).fill(0).map((_, i) => {
                   return {
                     attempt: `#${i + 1}`,
+                    Serverless: data.serverless[i]
+                      ? data.serverless[i].elapsed
+                      : null,
                     Regional: data.regional[i]
                       ? data.regional[i].elapsed
                       : null,
@@ -263,8 +309,8 @@ export default function Page() {
                   };
                 })}
                 dataKey="attempt"
-                categories={['Global', 'Regional']}
-                colors={['indigo', 'cyan']}
+                categories={['Global', 'Regional', 'Serverless']}
+                colors={['indigo', 'cyan', 'yellow']}
                 valueFormatter={dataFormatter}
                 marginTop="mt-6"
                 yAxisWidth="w-12"
