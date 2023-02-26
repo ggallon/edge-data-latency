@@ -1,0 +1,251 @@
+[
+  {
+    "name": "Upstash",
+    "database": "redis",
+    "regionID": "US-EAST-1",
+    "regionName": "N. Virginia",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "us-east-1"
+  },
+  {
+    "name": "Upstash",
+    "database": "redis",
+    "regionID": "US-WEST-1",
+    "regionName": "N. California",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "us-west-1"
+  },
+  {
+    "name": "vercel",
+    "database": "redis",
+    "regionID": "US-WEST-2",
+    "regionName": "Oregon",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "us-west-2"
+  },
+  {
+    "name": "Upstash",
+    "database": "redis",
+    "regionID": "EU-CENTRAL-1",
+    "regionName": "Frankfurt",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "eu-central-1"
+  },
+  {
+    "name": "Upstash",
+    "database": "redis",
+    "regionID": "EU-WEST-1",
+    "regionName": "Ireland",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "eu-west-1"
+  },
+  {
+    "name": "Upstash",
+    "database": "redis",
+    "regionID": "US-CENTRAL-1",
+    "regionName": "Iowa",
+    "subProviderName": "GCP",
+    "subProviderRegionId": "us-central-1"
+  },
+  {
+    "name": "PlanetScale",
+    "database": "mysql",
+    "regionID": "us-east",
+    "regionName": "Northern Virginia",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "us-east-1"
+  },
+  {
+    "name": "PlanetScale",
+    "database": "mysql",
+    "regionID": "us-west",
+    "regionName": "Oregon",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "us-west-2"
+  },
+  {
+    "name": "PlanetScale",
+    "database": "mysql",
+    "regionID": "eu-west",
+    "regionName": "Dublin",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "eu-west-1"
+  },
+  {
+    "name": "PlanetScale",
+    "database": "mysql",
+    "regionID": "ap-south",
+    "regionName": "Mumbai",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "ap-south-1"
+  },
+  {
+    "name": "PlanetScale",
+    "database": "mysql",
+    "regionID": "ap-southeast",
+    "regionName": "Singapore",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "ap-southeast-1 "
+  },
+  {
+    "name": "PlanetScale",
+    "database": "mysql",
+    "regionID": "ap-northeast",
+    "regionName": "Tokyo",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "ap-northeast-1"
+  },
+  {
+    "name": "PlanetScale",
+    "database": "mysql",
+    "regionID": "eu-central",
+    "regionName": "Frankfurt",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "eu-central-1"
+  },
+  {
+    "name": "PlanetScale",
+    "database": "mysql",
+    "regionID": "aws-ap-southeast-2",
+    "regionName": "Sydney",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "ap-southeast-2"
+  },
+  {
+    "name": "PlanetScale",
+    "database": "mysql",
+    "regionID": "aws-sa-east-1",
+    "regionName": "Sao Paulo",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "sa-east-1"
+  },
+  {
+    "name": "PlanetScale",
+    "database": "mysql",
+    "regionID": "aws-eu-west-2",
+    "regionName": "London",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "eu-west-2"
+  },
+  {
+    "name": "PlanetScale",
+    "database": "mysql",
+    "regionID": "gcp-us-central1",
+    "regionName": "Council Bluffs, Iowa",
+    "subProviderName": "GCP",
+    "subProviderRegionId": "us-central1"
+  },
+  {
+    "name": "PlanetScale",
+    "database": "mysql",
+    "regionID": "gcp-us-east4",
+    "regionName": "Ashburn, Virginia",
+    "subProviderName": "GCP",
+    "subProviderRegionId": "us-east4"
+  },
+  {
+    "name": "PlanetScale",
+    "database": "mysql",
+    "regionID": "gcp-northamerica-northeast1",
+    "regionName": "Montréal, Québec, Canada",
+    "subProviderName": "GCP",
+    "subProviderRegionId": "northamerica-northeast1"
+  },
+  {
+    "name": "Supabase",
+    "database": "Postgres",
+    "regionID": "",
+    "regionName": "West US (North California)",
+    "subProviderName": "",
+    "subProviderRegionId": ""
+  },
+  {
+    "name": "Supabase",
+    "database": "Postgres",
+    "regionID": "",
+    "regionName": "East US (North Virginia)",
+    "subProviderName": "",
+    "subProviderRegionId": ""
+  },
+  {
+    "name": "Supabase",
+    "database": "Postgres",
+    "regionID": "",
+    "regionName": "Canada (Central)",
+    "subProviderName": "",
+    "subProviderRegionId": ""
+  },
+  {
+    "name": "Supabase",
+    "database": "Postgres",
+    "regionID": "",
+    "regionName": "West EU (Ireland)",
+    "subProviderName": "",
+    "subProviderRegionId": ""
+  },
+  {
+    "name": "Supabase",
+    "database": "Postgres",
+    "regionID": "",
+    "regionName": "West EU (London)",
+    "subProviderName": "",
+    "subProviderRegionId": ""
+  },
+  {
+    "name": "Supabase",
+    "database": "Postgres",
+    "regionID": "",
+    "regionName": "Central EU (Frankfurt)",
+    "subProviderName": "",
+    "subProviderRegionId": ""
+  },
+  {
+    "name": "Supabase",
+    "database": "Postgres",
+    "regionID": "",
+    "regionName": "South Asia (Mumbai)",
+    "subProviderName": "",
+    "subProviderRegionId": ""
+  },
+  {
+    "name": "Supabase",
+    "database": "Postgres",
+    "regionID": "",
+    "regionName": "Southeast Asia (Singapore)",
+    "subProviderName": "",
+    "subProviderRegionId": ""
+  },
+  {
+    "name": "Supabase",
+    "database": "Postgres",
+    "regionID": "",
+    "regionName": "Northeast Asia (Tokyo)",
+    "subProviderName": "",
+    "subProviderRegionId": ""
+  },
+  {
+    "name": "Supabase",
+    "database": "Postgres",
+    "regionID": "",
+    "regionName": "Northeast Asia (Seoul)",
+    "subProviderName": "",
+    "subProviderRegionId": ""
+  },
+  {
+    "name": "Supabase",
+    "database": "Postgres",
+    "regionID": "",
+    "regionName": "Oceania (Sydney)",
+    "subProviderName": "",
+    "subProviderRegionId": ""
+  },
+  {
+    "name": "Supabase",
+    "database": "Postgres",
+    "regionID": "",
+    "regionName": "South America (São Paulo)",
+    "subProviderName": "",
+    "subProviderRegionId": ""
+  },
+]
+

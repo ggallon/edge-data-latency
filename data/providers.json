@@ -1,0 +1,128 @@
+[
+  {
+    "providerName": "Vercel",
+    "regionID": "arn1",
+    "regionName": "Stockholm, Sweden",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "eu-north-1"
+  },
+  {
+    "providerName": "Vercel",
+    "regionID": "bom1",
+    "regionName": "Mumbai, India",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "ap-south-1"
+  },
+  {
+    "providerName": "Vercel",
+    "regionID": "cdg1",
+    "regionName": "Paris, France",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "eu-west-3"
+  },
+  {
+    "providerName": "Vercel",
+    "regionID": "cle1",
+    "regionName": "Cleveland, USA",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "us-east-2"
+  },
+  {
+    "providerName": "Vercel",
+    "regionID": "cpt1",
+    "regionName": "Cape Town, South Africa",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "af-south-1"
+  },
+  {
+    "providerName": "Vercel",
+    "regionID": "dub1",
+    "regionName": "Dublin, Ireland",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "eu-west-1"
+  },
+  {
+    "providerName": "Vercel",
+    "regionID": "fra1",
+    "regionName": "Frankfurt, Germany",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "eu-central-1"
+  },
+  {
+    "providerName": "Vercel",
+    "regionID": "gru1",
+    "regionName": "São Paulo, Brazil",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "sa-east-1"
+  },
+  {
+    "providerName": "Vercel",
+    "regionID": "hkg1",
+    "regionName": "Hong Kong",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "ap-east-1"
+  },
+  {
+    "providerName": "Vercel",
+    "regionID": "hnd1",
+    "regionName": "Tokyo, Japan",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "ap-northeast-1"
+  },
+  {
+    "providerName": "Vercel",
+    "regionID": "iad1",
+    "regionName": "Washington, D.C., USA",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "us-east-1"
+  },
+  {
+    "providerName": "Vercel",
+    "regionID": "icn1",
+    "regionName": "Seoul, South Korea",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "ap-northeast-2"
+  },
+  {
+    "providerName": "Vercel",
+    "regionID": "kix1",
+    "regionName": "Osaka, Japan",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "ap-northeast-3"
+  },
+  {
+    "providerName": "Vercel",
+    "regionID": "lhr1",
+    "regionName": "London, United Kingdom",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "eu-west-2"
+  },
+  {
+    "providerName": "Vercel",
+    "regionID": "pdx1",
+    "regionName": "Portland, USA",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "us-west-2"
+  },
+  {
+    "providerName": "Vercel",
+    "regionID": "sfo1",
+    "regionName": "San Francisco, USA",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "us-west-1"
+  },
+  {
+    "providerName": "Vercel",
+    "regionID": "sin1",
+    "regionName": "Singapore",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "ap-southeast-1"
+  },
+  {
+    "providerName": "Vercel",
+    "regionID": "syd1",
+    "regionName": "Sydney, Australia",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "ap-southeast-2"
+  },
+]
