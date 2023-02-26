@@ -2,7 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { NextRequest as Request, NextResponse as Response } from "next/server";
 import { findRegion } from "@/utils/find-region";
 import { toNumber } from "@/utils/to-number";
-import type { Database} from "@/types/supabase"
+import type { Database } from "@/types/supabase"
 
 export const config = {
   runtime: "edge",
