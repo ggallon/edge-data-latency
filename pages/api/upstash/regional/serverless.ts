@@ -2,7 +2,6 @@ import { Redis } from "@upstash/redis"
 import { NextApiRequest as Request, NextApiResponse as Response  } from 'next'
 import { findRegion } from "@/utils/find-region";
 import { toNumber } from "@/utils/to-number";
-import type { Database } from "@/types/planetscale"
 
 let coldStart = true;
 

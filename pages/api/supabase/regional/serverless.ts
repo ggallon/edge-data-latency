@@ -2,7 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { NextApiRequest as Request, NextApiResponse as Response  } from 'next'
 import { findRegion } from "@/utils/find-region";
 import { toNumber } from "@/utils/to-number";
-import type { Database } from "@/types/planetscale"
+import type { Database } from "@/types/supabase"
 
 let coldStart = true;
 
