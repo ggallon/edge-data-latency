@@ -3,7 +3,7 @@ import { PlanetScaleDialect } from "kysely-planetscale";
 import { NextApiRequest as Request, NextApiResponse as Response  } from 'next'
 import { findRegion } from "@/utils/find-region";
 import { toNumber } from "@/utils/to-number";
-import type { Database } from "@/types/supabase"
+import type { Database } from "@/types/planetscale"
 
 const AWS_LAMBDA_FUNCTION_VERSION = process.env.AWS_LAMBDA_FUNCTION_VERSION ?? ""
 const VERCEL_REGION = process.env.VERCEL_REGION ?? ""

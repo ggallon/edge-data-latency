@@ -57,15 +57,15 @@ export default function Page() {
       let globalValue = null;
 
       if (shouldTestServerless) {
-        serverlessValue = await runTestServer(dataService, 'regional', 'serverless', queryCount);
+        serverlessValue = await runTest(dataService, 'regional', 'serverless', queryCount);
       }
 
       if (shouldTestRegional) {
-        regionalValue = await runTestServer(dataService, 'regional', 'edge', queryCount);
+        regionalValue = await runTest(dataService, 'regional', 'edge', queryCount);
       }
 
       if (shouldTestGlobal) {
-        globalValue = await runTestServer(dataService, 'global', 'edge', queryCount);
+        globalValue = await runTest(dataService, 'global', 'edge', queryCount);
       }
 
       setData((data) => {
@@ -179,7 +179,7 @@ export default function Page() {
                 name="serverless"
                 value="serverless"
                 checked={shouldTestServerless}
-                onChange={(e) => setShouldTestRegional(e.target.checked)}
+                onChange={(e) => setShouldTestServerless(e.target.checked)}
               />{' '}
               Test regional [fra1] serverless function
             </label>

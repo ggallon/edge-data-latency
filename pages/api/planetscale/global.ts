@@ -3,7 +3,7 @@ import { PlanetScaleDialect } from "kysely-planetscale";
 import { NextRequest as Request, NextResponse as Response } from "next/server";
 import { findRegion } from "@/utils/find-region";
 import { toNumber } from "@/utils/to-number";
-import type { Database } from "@/types/supabase"
+import type { Database } from "@/types/planetscale"
 
 export const config = {
   runtime: "edge",
