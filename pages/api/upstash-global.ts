@@ -1,5 +1,7 @@
 import { Redis } from "@upstash/redis"
 import { NextRequest as Request, NextResponse as Response } from "next/server";
+import { findRegion } from "@/utils/find-region";
+import { toNumber } from "@/utils/to-number";
 
 export const config = {
   runtime: "edge",
@@ -14,16 +16,14 @@ export default async function api(req: Request) {
 
   let data = null;
   for (let i = 0; i < count; i++) {
-    data = await redis.get("employees")
+    data = await redis.json.get("employees", "$[*]")
   }
-
   return Response.json(
     {
       data,
       queryDuration: Date.now() - time,
       invocationIsCold: start === time,
-      invocationRegion:
-        (req.headers.get("x-vercel-id") ?? "").split(":")[1] || null,
+      invocationRegion: findRegion(req.headers.get("x-vercel-id") ?? "")
     },
     {
       headers: {
@@ -31,11 +31,4 @@ export default async function api(req: Request) {
       },
     }
   );
-}
-
-// convert a query parameter to a number
-// also apply a min and a max
-function toNumber(queryParam: string | null, min = 1, max = 5) {
-  const num = Number(queryParam);
-  return Number.isNaN(num) ? null : Math.min(Math.max(num, min), max);
 }
