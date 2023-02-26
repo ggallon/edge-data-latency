@@ -25,11 +25,11 @@ const db = new Kysely<Database>({
 const start = Date.now();
 
 export default async function api(req: Request, res: Response) {
-  const query = req.query;
-  const { count } = query;
-  const countNumber: number = toNumber(count[0]) ?? 0
   const time = Date.now();
 
+  const count = req.query?.count;
+  const countNumber: number = toNumber(count[0]) ?? 0
+  
   let data = null;
   for (let i = 0; i < countNumber; i++) {
     data = await db
@@ -44,6 +44,8 @@ export default async function api(req: Request, res: Response) {
     data,
     queryDuration: Date.now() - time,
     invocationIsCold: start === time,
-    invocationRegion: findRegion(req.headers["x-vercel-id"][0] ?? "")
+    invocationRegion: findRegion(req.headers["x-vercel-id"][0] ?? ""),
+    headers: JSON.stringify(req.headers, null, 2),
+    env: JSON.stringify(process.env, null, 2)
   })
 }
