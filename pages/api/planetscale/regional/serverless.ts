@@ -5,7 +5,7 @@ import { findRegion } from "@/utils/find-region";
 import { toNumber } from "@/utils/to-number";
 
 const AWS_LAMBDA_FUNCTION_VERSION = process.env.AWS_LAMBDA_FUNCTION_VERSION ?? ""
-const VERCEL_REGION process.env.VERCEL_REGION ?? ""
+const VERCEL_REGION = process.env.VERCEL_REGION ?? ""
 
 interface EmployeeTable {
   emp_no: number;
