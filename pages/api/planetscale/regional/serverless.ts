@@ -27,8 +27,8 @@ const start = Date.now();
 export default async function api(req: Request, res: Response) {
   const time = Date.now();
 
-  const count = req.query?.count;
-  const countNumber: number = toNumber(count[0]) ?? 0
+  const count = req.query?.count as string;
+  const countNumber = toNumber(count) ?? 0
   
   let data = null;
   for (let i = 0; i < countNumber; i++) {
@@ -44,8 +44,9 @@ export default async function api(req: Request, res: Response) {
     data,
     queryDuration: Date.now() - time,
     invocationIsCold: start === time,
-    invocationRegion: findRegion(req.headers["x-vercel-id"][0] ?? ""),
-    headers: JSON.stringify(req.headers, null, 2),
+    invocationRegion: process.env.VERCEL_REGION ?? "",
+    test: findRegion(req.headers["x-vercel-id"] as string ?? ""),
+    headers: req.headers,
     env: JSON.stringify(process.env, null, 2)
   })
 }
