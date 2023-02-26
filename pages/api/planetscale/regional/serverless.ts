@@ -27,6 +27,7 @@ const start = Date.now();
 export default async function api(req: Request, res: Response) {
   const query = req.query;
   const { count } = query;
+  const countNumber = toNumber(count)
   const time = Date.now();
 
   let data = null;
