@@ -27,11 +27,11 @@ const start = Date.now();
 export default async function api(req: Request, res: Response) {
   const query = req.query;
   const { count } = query;
-  const countNumber = toNumber(count)
+  const countNumber: number = toNumber(count[0]) ?? 0
   const time = Date.now();
 
   let data = null;
-  for (let i = 0; i < count; i++) {
+  for (let i = 0; i < countNumber; i++) {
     data = await db
       .selectFrom("employees")
       .select(["emp_no", "first_name", "last_name"])
@@ -44,6 +44,6 @@ export default async function api(req: Request, res: Response) {
     data,
     queryDuration: Date.now() - time,
     invocationIsCold: start === time,
-    invocationRegion: findRegion(req.headers["x-vercel-id"] ?? "")
+    invocationRegion: findRegion(req.headers["x-vercel-id"][0] ?? "")
   })
 }
