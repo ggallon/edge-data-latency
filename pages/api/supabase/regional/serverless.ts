@@ -1,4 +1,4 @@
-import { Redis } from "@upstash/redis"
+import { createClient } from "@supabase/supabase-js";
 import { NextApiRequest as Request, NextApiResponse as Response  } from 'next'
 import { findRegion } from "@/utils/find-region";
 import { toNumber } from "@/utils/to-number";
@@ -8,7 +8,10 @@ let coldStart = true;
 
 const VERCEL_REGION = process.env.VERCEL_REGION ?? ""
 
-const redis = Redis.fromEnv()
+const supabase = createClient<Database>(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY
+);
 
 export default async function api(req: Request, res: Response) {
   const time = Date.now();
@@ -20,7 +23,11 @@ export default async function api(req: Request, res: Response) {
   
   let data = null;
   for (let i = 0; i < countNumber; i++) {
-    data = await redis.json.get("employees", "$[*]")
+    const response = await supabase
+      .from("employees")
+      .select("emp_no,first_name,last_name")
+      .limit(10);
+    data = response.data;
   }
 
   res.setHeader('x-serverless-is-cold', isCold ? "1" : "0")

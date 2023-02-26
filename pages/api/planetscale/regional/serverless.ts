@@ -19,7 +19,7 @@ const db = new Kysely<Database>({
 
 export default async function api(req: Request, res: Response) {
   const time = Date.now();
-  const now = coldStart
+  const isCold = coldStart
   coldStart = false;
 
   const count = req.query?.count as string;
@@ -34,11 +34,11 @@ export default async function api(req: Request, res: Response) {
       .execute();
   }
 
-  res.setHeader('x-serverless-is-cold', now ? "1" : "0")
+  res.setHeader('x-serverless-is-cold', isCold ? "1" : "0")
   return res.status(200).json({
     data,
     queryDuration: Date.now() - time,
-    invocationIsCold: now,
+    invocationIsCold: isCold,
     invocationRegion: VERCEL_REGION,
     vercel: findRegion(req.headers["x-vercel-id"] as string ?? ""),
   })
