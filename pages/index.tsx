@@ -8,7 +8,8 @@ import {
 
 const ATTEMPTS = 10;
 
-type Region = 'regional' | 'global';
+type Region = 'global' | 'regional' | 'fra1';
+type Type = 'edge' | 'serverless';
 
 export default function Page() {
   const [isTestRunning, setIsTestRunning] = useState(false);
@@ -24,32 +25,13 @@ export default function Page() {
   });
 
   const runTest = useCallback(
-    async (dataService: string, type: Region, queryCount: number) => {
+    async (dataService: string, region: Region, type: Type,  queryCount: number) => {
       try {
         const start = Date.now();
         const res = await fetch(
-          `/api/${dataService}-${type}?count=${queryCount}`
-        );
-        const data = await res.json();
-        const end = Date.now();
-        return {
-          ...data,
-          elapsed: end - start,
-        };
-      } catch (e) {
-        // instead of retrying we just give up
-        return null;
-      }
-    },
-    []
-  );
-
-  const runTestServer = useCallback(
-    async (dataService: string, type: Region, queryCount: number) => {
-      try {
-        const start = Date.now();
-        const res = await fetch(
-          `/api/${dataService}/${type}/serverless?count=${queryCount}`
+          'global' === region 
+            ? `/api/${dataService}/global?count=${queryCount}`
+            : `/api/${dataService}/${region}/${type}?count=${queryCount}`
         );
         const data = await res.json();
         const end = Date.now();
@@ -75,15 +57,15 @@ export default function Page() {
       let globalValue = null;
 
       if (shouldTestServerless) {
-        serverlessValue = await runTestServer(dataService, 'regional', queryCount);
+        serverlessValue = await runTestServer(dataService, 'regional', 'serverless', queryCount);
       }
 
       if (shouldTestRegional) {
-        regionalValue = await runTest(dataService, 'regional', queryCount);
+        regionalValue = await runTestServer(dataService, 'regional', 'edge', queryCount);
       }
 
       if (shouldTestGlobal) {
-        globalValue = await runTest(dataService, 'global', queryCount);
+        globalValue = await runTestServer(dataService, 'global', 'edge', queryCount);
       }
 
       setData((data) => {
@@ -97,7 +79,7 @@ export default function Page() {
     }
 
     setIsTestRunning(false);
-  }, [runTest, runTestServer, queryCount, dataService, shouldTestGlobal, shouldTestRegional, shouldTestServerless]);
+  }, [runTest, queryCount, dataService, shouldTestGlobal, shouldTestRegional, shouldTestServerless]);
 
   return (
     <main className="max-w-5xl p-6 sm:p-10 mx-auto">
@@ -258,7 +240,7 @@ export default function Page() {
                 Latency distribution (processing time)
               </Title>
               <Text height="h-14">
-                This is how long it takes for the edge function to run the
+                This is how long it takes for the edge or serverless function to run the
                 queries and return the result. Your internet connections{' '}
                 <b>will not</b> influence these results.
               </Text>
@@ -290,7 +272,7 @@ export default function Page() {
               <Title truncate={true}>Latency distribution (end-to-end)</Title>
               <Text height="h-14">
                 This is the total latency from the client&apos;s perspective. It
-                considers the total roundtrip between browser and edge. Your
+                considers the total roundtrip between browser and edge or serverless. Your
                 internet connection and location <b>will</b> influence these
                 results.
               </Text>

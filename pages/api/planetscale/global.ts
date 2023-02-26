@@ -3,20 +3,11 @@ import { PlanetScaleDialect } from "kysely-planetscale";
 import { NextRequest as Request, NextResponse as Response } from "next/server";
 import { findRegion } from "@/utils/find-region";
 import { toNumber } from "@/utils/to-number";
+import type { Database } from "@/types/supabase"
 
 export const config = {
   runtime: "edge",
 };
-
-interface EmployeeTable {
-  emp_no: number;
-  first_name: string;
-  last_name: string;
-}
-
-interface Database {
-  employees: EmployeeTable;
-}
 
 const db = new Kysely<Database>({
   dialect: new PlanetScaleDialect({
@@ -27,11 +18,15 @@ const db = new Kysely<Database>({
 });
 
 const start = Date.now();
+let coldStart = true;
 
 export default async function api(req: Request) {
-  const count = toNumber(new URL(req.url).searchParams.get("count"));
   const time = Date.now();
+  const now = coldStart
+  coldStart = false;
 
+  const count = toNumber(new URL(req.url).searchParams.get("count"));
+  
   let data = null;
   for (let i = 0; i < count; i++) {
     data = await db
@@ -46,6 +41,7 @@ export default async function api(req: Request) {
       data,
       queryDuration: Date.now() - time,
       invocationIsCold: start === time,
+      invocationIsColdStart: now,
       invocationRegion: findRegion(req.headers.get("x-vercel-id") ?? "")
     },
     {
