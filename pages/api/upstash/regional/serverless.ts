@@ -1,5 +1,4 @@
-import { Kysely } from "kysely";
-import { PlanetScaleDialect } from "kysely-planetscale";
+import { Redis } from "@upstash/redis"
 import { NextApiRequest as Request, NextApiResponse as Response  } from 'next'
 import { findRegion } from "@/utils/find-region";
 import { toNumber } from "@/utils/to-number";
@@ -9,13 +8,7 @@ let coldStart = true;
 
 const VERCEL_REGION = process.env.VERCEL_REGION ?? ""
 
-const db = new Kysely<Database>({
-  dialect: new PlanetScaleDialect({
-    host: process.env.PSCALE_DB_HOST,
-    username: process.env.PSCALE_DB_USERNAME,
-    password: process.env.PSCALE_DB_PASSWORD,
-  }),
-});
+const redis = Redis.fromEnv()
 
 export default async function api(req: Request, res: Response) {
   const time = Date.now();
@@ -27,11 +20,7 @@ export default async function api(req: Request, res: Response) {
   
   let data = null;
   for (let i = 0; i < countNumber; i++) {
-    data = await db
-      .selectFrom("employees")
-      .select(["emp_no", "first_name", "last_name"])
-      .limit(10)
-      .execute();
+    data = await redis.json.get("employees", "$[*]")
   }
 
   res.setHeader('x-serverless-is-cold', now ? "1" : "0")
