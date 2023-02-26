@@ -16,17 +16,11 @@ const db = new Kysely<Database>({
   }),
 });
 
-const start = Date.now();
 let coldStart = true;
-let invocation_count = 0
 
 export default async function api(req: Request, res: Response) {
   const time = Date.now();
-  invocation_count += 1
-  let now = coldStart
-  if (coldStart) {
-    console.log("First time the handler was called since this function was deployed in this container");
-  }
+  const now = coldStart
   coldStart = false;
 
   const count = req.query?.count as string;
@@ -41,13 +35,11 @@ export default async function api(req: Request, res: Response) {
       .execute();
   }
 
-  res.setHeader('x-edge-is-cold', start === time ? "1" : "0")
+  res.setHeader('x-serverless-is-cold', now ? "1" : "0")
   return res.status(200).json({
     data,
     queryDuration: Date.now() - time,
-    invocationIsCold: start === time,
-    invocationIsColdStart: [coldStart, now, invocation_count],
-    invocationLambdaVersion: AWS_LAMBDA_FUNCTION_VERSION,
+    invocationIsCold: now,
     invocationRegion: VERCEL_REGION,
     vercel: findRegion(req.headers["x-vercel-id"] as string ?? ""),
   })
