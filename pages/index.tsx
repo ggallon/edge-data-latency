@@ -1,9 +1,10 @@
 import { useCallback, useState } from 'react';
-import { AreaChart, Badge, Button, Card, ColGrid, Dropdown, DropdownItem, Text, Title } from '@tremor/react';
+import { Badge, Button, ColGrid, Dropdown, DropdownItem, Text, Title } from '@tremor/react';
 import {
   BoltIcon,
 } from '@heroicons/react/20/solid';
 
+import { Chart } from "@/components/chart"
 import { Code } from "@/components/code"
 import { FaunaIcon, GrafbaseIcon, PlanetScaleIcon, UpstashIcon } from "@/components/icons"
 import { dataFormatter } from "@/utils/data-formatter";
@@ -247,69 +248,27 @@ export default function Page() {
 
         {data.serverless.length || data.regional.length || data.global.length ? (
           <ColGrid numCols={1} numColsMd={2} gapX="gap-x-5" gapY="gap-y-5">
-            <Card>
-              <Title truncate={true}>
-                Latency distribution (processing time)
-              </Title>
-              <Text height="h-14">
-                This is how long it takes for the edge or serverless function to run the
-                queries and return the result. Your internet connections{' '}
-                <b>will not</b> influence these results.
-              </Text>
-
-              <AreaChart
-                data={new Array(ATTEMPTS).fill(0).map((_, i) => {
-                  return {
-                    attempt: `#${i + 1}`,
-                    Serverless: data.serverless[i]
-                      ? data.serverless[i].queryDuration
-                      : null,
-                    Regional: data.regional[i]
-                      ? data.regional[i].queryDuration
-                      : null,
-                    Global: data.global[i]
-                      ? data.global[i].queryDuration
-                      : null,
-                  };
-                })}
-                dataKey="attempt"
-                categories={['Global', 'Regional', 'Serverless']}
-                colors={['indigo', 'cyan', 'yellow']}
-                valueFormatter={dataFormatter}
-                marginTop="mt-6"
-                yAxisWidth="w-12"
-              />
-            </Card>
-            <Card>
-              <Title truncate={true}>Latency distribution (end-to-end)</Title>
-              <Text height="h-14">
-                This is the total latency from the client&apos;s perspective. It
-                considers the total roundtrip between browser and edge or serverless. Your
-                internet connection and location <b>will</b> influence these
-                results.
-              </Text>
-
-              <AreaChart
-                data={new Array(ATTEMPTS).fill(0).map((_, i) => {
-                  return {
-                    attempt: `#${i + 1}`,
-                    Serverless: data.serverless[i]
-                      ? data.serverless[i].elapsed
-                      : null,
-                    Regional: data.regional[i]
-                      ? data.regional[i].elapsed
-                      : null,
-                    Global: data.global[i] ? data.global[i].elapsed : null,
-                  };
-                })}
-                dataKey="attempt"
-                categories={['Global', 'Regional', 'Serverless']}
-                colors={['indigo', 'cyan', 'yellow']}
-                valueFormatter={dataFormatter}
-                marginTop="mt-6"
-                yAxisWidth="w-12"
-              />
-            </Card>
+            <Chart
+              title="Latency distribution (processing time)"
+              attempts={ATTEMPTS}
+              data={data}
+              param='queryDuration'
+            >
+              This is how long it takes for the edge or serverless function to run the
+              queries and return the result. Your internet connections{' '}
+              <b>will not</b> influence these results.
+            </Chart>
+            <Chart
+              title="Latency distribution (end-to-end)"
+              attempts={ATTEMPTS}
+              data={data}
+              param='elapsed'
+            >
+              This is the total latency from the client&apos;s perspective. It
+              considers the total roundtrip between browser and edge or serverless. Your
+              internet connection and location <b>will</b> influence these
+              results.
+            </Chart>
           </ColGrid>
         ) : null}
       </form>
