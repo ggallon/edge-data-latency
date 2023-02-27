@@ -1,4 +1,4 @@
-export function XataIcon() {
+export function XataIcon(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
