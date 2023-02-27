@@ -3,4 +3,4 @@ export const config = {
   regions: ["fra1"],
 };
 
-export { default } from "../supabase-global";
+export { default } from "../global";

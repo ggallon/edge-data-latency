@@ -3,4 +3,4 @@ export const config = {
   regions: ["fra1"],
 };
 
-export { default } from "../upstash-global";
+export { default } from "../global";
