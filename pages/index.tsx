@@ -1,10 +1,12 @@
 import { useCallback, useState } from 'react';
+import Balancer from 'react-wrap-balancer'
 import { Badge, Button, ColGrid, Dropdown, DropdownItem, Text, Title } from '@tremor/react';
 import {
   BoltIcon,
 } from '@heroicons/react/20/solid';
 
 import { Chart } from "@/components/chart"
+import { Checkbox } from "@/components/checkbox"
 import { Code } from "@/components/code"
 import { FaunaIcon, GrafbaseIcon, PlanetScaleIcon, UpstashIcon } from "@/components/icons"
 import { dataFormatter } from "@/utils/data-formatter";
@@ -87,24 +89,21 @@ export default function Page() {
   return (
     <main className="max-w-5xl p-6 sm:p-10 mx-auto">
       <div className="flex justify-start items-center gap-2">
-        <Title>Edge &lt;&gt; Data latency</Title>
+        <Title>Client &lt;--&gt; (Edge | Serverless) &lt;--&gt; Data latency</Title>
         <Badge text="BETA" size="xs" color="red" />
       </div>
       <Text>
-        This demo helps observe the latency characteristics of querying
-        different popular data services from varying compute locations.
+        <Balancer ratio={0.50}>This demo helps observe the latency characteristics of querying different popular data services from varying compute locations.</Balancer>
       </Text>
 
       <form className="flex flex-col gap-5 bg-gray-100 p-5 my-5 rounded-xl">
         <div className="flex flex-col gap-1">
-          <p className="font-bold">Data service</p>
+          <p className="font-bold">Databases for Serverless & Edge</p>
           <p className="text-gray-500 text-sm">
-            Vercel Edge Functions support multiple regions. By default
-            they&apos;re global, but it&apos;s possible to express a region
-            preference via the <Code className="text-xs">region</Code> setting.
+            <Balancer ratio={0.50}>The databases and backend spaces for developers building applications with serverless and edge compute.</Balancer>
           </p>
 
-          <div className="py-1 inline-flex">
+          <div className="py-2 inline-flex">
             <Dropdown
               defaultValue={dataService}
               onValueChange={(v) => setDataService(v)}
@@ -158,55 +157,40 @@ export default function Page() {
         <div className="flex flex-col gap-1">
           <p className="font-bold">Location</p>
           <p className="text-gray-500 text-sm">
-            Vercel Edge Functions support multiple regions. By default
-            they&apos;re global, but it&apos;s possible to express a region
-            preference via the <Code className="text-xs">region</Code> setting.
+            <Balancer ratio={0.50}>Vercel Edge Functions support multiple regions. By default they&apos;re global, but it&apos;s possible to express a region preference via the <Code className="text-xs">region</Code> setting.</Balancer>
           </p>
-          <p className="text-sm flex gap-3 flex-wrap gap-y-1">
-            <label className="flex items-center gap-2 whitespace-nowrap">
-              <input
-                type="checkbox"
-                disabled
-                name="region"
-                value="global"
-                checked={shouldTestGlobal}
-                onChange={(e) => setShouldTestGlobal(e.target.checked)}
-              />{' '}
-              Test global function
-            </label>
-            <label className="flex items-center gap-2 whitespace-nowrap">
-              <input
-                type="checkbox"
-                disabled
-                name="region"
-                value="regional"
-                checked={shouldTestRegional}
-                onChange={(e) => setShouldTestRegional(e.target.checked)}
-              />{' '}
-              Test regional [fra1] edge function
-            </label>
-            <label className="flex items-center gap-2 whitespace-nowrap">
-              <input
-                type="checkbox"
-                disabled
-                name="serverless"
-                value="serverless"
-                checked={shouldTestServerless}
-                onChange={(e) => setShouldTestServerless(e.target.checked)}
-              />{' '}
-              Test regional [fra1] serverless function
-            </label>
-          </p>
+          <fieldset className="flex flex-col py-2 sm:flex-row sm:gap-3">
+            <legend className="sr-only">Location</legend>
+            <Checkbox
+              name="global"
+              label="Global Edge"
+              description="function"
+              isChecked={shouldTestGlobal}
+              onChangeEvent={setShouldTestGlobal}
+            />
+            <Checkbox
+              name="regional"
+              label="Regional Edge"
+              description="function"
+              isChecked={shouldTestRegional}
+              onChangeEvent={setShouldTestRegional}
+            />
+            <Checkbox
+              name="serverless"
+              label="Regional Serverless"
+              description="function"
+              isChecked={shouldTestServerless}
+              onChangeEvent={setShouldTestServerless}
+            />
+          </fieldset>
         </div>
 
         <div className="flex flex-col gap-1">
           <p className="font-bold">Waterfall</p>
           <p className="text-gray-500 text-sm">
-            Executing complex API routes globally can be slow when the database
-            is single-region, due to having multiple roundtrips to a single
-            server that&apos;s distant from the user.
+            <Balancer ratio={0.50}>Executing complex API routes globally can be slow when the database is single-region, due to having multiple roundtrips to a single server that&apos;s distant from the user.</Balancer>
           </p>
-          <p className="text-sm flex gap-3 flex-wrap gap-y-1">
+          <p className="text-sm flex gap-3 py-2 flex-wrap gap-y-1">
             <label className="flex items-center gap-2 whitespace-nowrap">
               <input
                 type="radio"
