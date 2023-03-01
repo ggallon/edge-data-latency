@@ -2,7 +2,7 @@ import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { motion } from "framer-motion";
 import cn from "clsx"
 
-export function Checkbox({ name, description, label, disabled, isChecked, onChangeEvent }) {
+export function Checkbox({ name, description, label, disabled = false, isChecked, onChangeEvent }) {
   return (
     <div className="flex items-center">
       <div className="relative flex h-4 w-4 items-center justify-center">
@@ -39,7 +39,7 @@ export function Checkbox({ name, description, label, disabled, isChecked, onChan
           )}
           aria-describedby={`${name}-description`}
         >
-          <CheckIcon checked={isChecked} className="h-6 w-6" />
+          <CheckIcon checked={isChecked} className="h-4 w-4 text-white -ml-[1px] -mt-[1px]" />
         </CheckboxPrimitive.Root>
       </div>
       <div className="ml-2 text-sm">
@@ -54,7 +54,7 @@ export function Checkbox({ name, description, label, disabled, isChecked, onChan
   )
 }
 
-function CheckIcon({ checked,  props }) {
+function CheckIcon({ checked,  ...props }) {
   return (
     <svg
       {...props}
@@ -71,7 +71,6 @@ function CheckIcon({ checked,  props }) {
           unchecked: {
             pathLength: 0,
             opacity: 0,
-            color: "var(--transparent)",
             transition: {
               duration: 0.5,
             },
@@ -79,14 +78,11 @@ function CheckIcon({ checked,  props }) {
           checked: {
             pathLength: 1,
             opacity: 1,
-            color: "var(--white)",
             transition: {
               type: "tween",
               ease: "easeOut",
+              delay: 0.2,
               duration: 0.3,
-              pathLength: {
-                delay: 0.2,
-              }
             },
           },
         }}
