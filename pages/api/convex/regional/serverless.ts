@@ -1,5 +1,5 @@
 import { ConvexHttpClient } from "convex/browser";
-import { NextRequest as Request, NextResponse as Response } from "next/server";
+import { NextApiRequest as Request, NextApiResponse as Response  } from 'next'
 import { findRegion } from "@/utils/find-region";
 import { toNumber } from "@/utils/to-number";
 
