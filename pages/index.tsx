@@ -8,7 +8,7 @@ import {
 import { Chart } from "@/components/chart"
 import { Checkbox } from "@/components/checkbox"
 import { Code } from "@/components/code"
-import { ConvexIcon, FaunaIcon, GrafbaseIcon, PlanetScaleIcon, UpstashIcon, XataIcon } from "@/components/icons"
+import { ConvexIcon, FaunaIcon, GrafbaseIcon, MongoIcon, PlanetScaleIcon, UpstashIcon, XataIcon } from "@/components/icons"
 import { dataFormatter } from "@/utils/data-formatter";
 
 const ATTEMPTS = 10;
@@ -121,13 +121,11 @@ export default function Page() {
                 text="PlanetScale (Kysely + database-js)"
                 icon={PlanetScaleIcon}
               />
-              {/*
               <DropdownItem
-                value="shopify"
-                text="Shopify (Storefront GraphQL API)"
-                icon={ShoppingCartIcon}
+                value="mongo"
+                text="MongoDB (Data API)"
+                icon={MongoIcon}
               />
-              */}
               <DropdownItem
                 value="supabase"
                 text="Supabase (supabase-js)"
