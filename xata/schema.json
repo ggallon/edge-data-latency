@@ -1,0 +1,26 @@
+{
+  "tables": [
+    {
+      "name": "employees",
+      "columns": [
+        {
+          "name": "first_name",
+          "type": "string"
+        },
+        {
+          "name": "last_name",
+          "type": "string"
+        },
+        {
+          "name": "inserted_at",
+          "type": "datetime"
+        },
+        {
+          "name": "emp_no",
+          "type": "int",
+          "unique": true
+        }
+      ]
+    }
+  ]
+}

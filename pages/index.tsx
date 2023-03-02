@@ -8,7 +8,7 @@ import {
 import { Chart } from "@/components/chart"
 import { Checkbox } from "@/components/checkbox"
 import { Code } from "@/components/code"
-import { ConvexIcon, FaunaIcon, GrafbaseIcon, PlanetScaleIcon, UpstashIcon } from "@/components/icons"
+import { ConvexIcon, FaunaIcon, GrafbaseIcon, PlanetScaleIcon, UpstashIcon, XataIcon } from "@/components/icons"
 import { dataFormatter } from "@/utils/data-formatter";
 
 const ATTEMPTS = 10;
@@ -138,13 +138,6 @@ export default function Page() {
                 text="Fauna (faunadb.js)"
                 icon={FaunaIcon}
               />
-              {/*
-              <DropdownItem
-                value="xata"
-                text="Xata (SDK)"
-                icon={XataIcon}
-              />
-              */}
               <DropdownItem
                 value="upstash"
                 text="Upstash (SDK)"
@@ -154,6 +147,11 @@ export default function Page() {
                 value="convex"
                 text="Convex (SDK)"
                 icon={ConvexIcon}
+              />
+              <DropdownItem
+                value="xata"
+                text="Xata (SDK)"
+                icon={XataIcon}
               />
             </Dropdown>
           </div>
