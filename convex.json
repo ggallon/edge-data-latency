@@ -1,0 +1,7 @@
+{
+  "project": "edge-data",
+  "team": "ggallon",
+  "prodUrl": "https://doubtful-narwhal-451.convex.cloud",
+  "functions": "convex/",
+  "authInfo": []
+}
