@@ -4,7 +4,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "convex codegen"
   },
   "dependencies": {
     "@heroicons/react": "2.0.16",
@@ -17,6 +18,7 @@
     "@upstash/redis": "1.20.0",
     "@xata.io/client": "0.22.3",
     "autoprefixer": "10.4.13",
+    "convex": "0.9.1",
     "clsx": "^1.2.1",
     "eslint": "8.34.0",
     "eslint-config-next": "13.2.1",
