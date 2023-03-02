@@ -8,7 +8,7 @@ import {
 import { Chart } from "@/components/chart"
 import { Checkbox } from "@/components/checkbox"
 import { Code } from "@/components/code"
-import { FaunaIcon, GrafbaseIcon, PlanetScaleIcon, UpstashIcon } from "@/components/icons"
+import { ConvexIcon, FaunaIcon, GrafbaseIcon, PlanetScaleIcon, UpstashIcon } from "@/components/icons"
 import { dataFormatter } from "@/utils/data-formatter";
 
 const ATTEMPTS = 10;
@@ -149,6 +149,11 @@ export default function Page() {
                 value="upstash"
                 text="Upstash (SDK)"
                 icon={UpstashIcon}
+              />
+              <DropdownItem
+                value="convex"
+                text="Convex (SDK)"
+                icon={ConvexIcon}
               />
             </Dropdown>
           </div>
