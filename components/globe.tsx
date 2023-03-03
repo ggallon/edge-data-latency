@@ -4,10 +4,7 @@ import { useEffect, useRef } from "react";
 export function Globe() {
   const canvasRef = useRef();
   const globeRef = useRef();
-  const pointerInteracting = useRef(null);
-  const pointerInteractingFull = useRef(null);
-  const pointerInteractionMovement = useRef(0);
-  const pointerInteractionMovementFull = useRef({ x: 0, y: 0 });
+  const pointerInteractingRef = useRef(null);
   const focusRef = useRef([0, 0])
 
   const locationToAngles = (lat, long) => {
@@ -39,7 +36,7 @@ export function Globe() {
       glowColor: [1.2, 1.2, 1.2],
       markers: [
         { location: [37.78, -122.412], size: 0.3},
-        { location: [52.52, 13.405], size: 0.1},
+        { location: [44.8412, -0.5806], size: 0.1},
         { location: [35.676, 139.65], size: 0.1},
         { location: [-34.60, -58.38], size: 0.1},
       ],
@@ -78,42 +75,37 @@ export function Globe() {
         }}
         className="w-full h-full"
         onPointerDown={(e) => {
-          pointerInteractingFull.current = {
-            x: e.clientX - pointerInteractionMovementFull.current.x,
-            y: e.clientY - pointerInteractionMovementFull.current.y
-          }
+          const [focusPhi, focusTheta] = focusRef.current
+          pointerInteractingRef.current = [
+            (e.clientX / 200) - focusPhi,
+            (e.clientY / 200) - focusTheta
+          ]
           canvasRef.current.style.cursor = 'grabbing';
         }}
         onPointerUp={() => {
-          pointerInteractingFull.current = null
+          pointerInteractingRef.current = null
           canvasRef.current.style.cursor = 'grab';
         }}
         onPointerOut={() => {
-          pointerInteractingFull.current = null
+          pointerInteractingRef.current = null
           canvasRef.current.style.cursor = 'grab';
         }}
         onMouseMove={(e) => {
-          if (pointerInteractingFull.current !== null) {
-            const [focusPhi, focusTheta] = focusRef.current
-            const deltaX = e.clientX - pointerInteractingFull.current.x
-            const deltaY = e.clientY - pointerInteractingFull.current.y
-            pointerInteractionMovementFull.current = {
-              x: deltaX,
-              y: deltaY
-            }
-            focusRef.current = [deltaX / 200, deltaY / 200]
+          if (pointerInteractingRef.current !== null) {
+            const [pointerPhi, pointerTheta] = pointerInteractingRef.current
+            focusRef.current = [
+              (e.clientX / 200) - pointerPhi,
+              (e.clientY / 200) - pointerTheta
+            ]
           }
         }}
         onTouchMove={(e) => {
-          if (pointerInteractingFull.current !== null && e.touches[0]) {
-            const [focusPhi, focusTheta] = focusRef.current
-            const deltaX = e.clientX - pointerInteractingFull.current.x
-            const deltaY = e.clientY - pointerInteractingFull.current.y
-            pointerInteractionMovementFull.current = {
-              x: deltaX,
-              y: deltaY
-            }
-            focusRef.current = [deltaX / 100, deltaY / 100]
+          if (pointerInteractingRef.current !== null && e.touches[0]) {
+            const [pointerPhi, pointerTheta] = pointerInteractingRef.current
+            focusRef.current = [
+              (e.clientX / 200) - pointerPhi,
+              (e.clientY / 200) - pointerTheta
+            ]
           }
         }}
       />
@@ -129,9 +121,8 @@ export function Globe() {
           focusRef.current = locationToAngles(37.78, -122.412)
         }}>📍 San Francisco</button>
         <button onClick={() => {
-          console.log("Berlin", locationToAngles(52.52, 13.405))
-          focusRef.current = locationToAngles(52.52, 13.405)
-        }}>📍 Berlin</button>
+          focusRef.current = locationToAngles(44.8412, -0.5806)
+        }}>📍 Bordeaux</button>
         <button onClick={() => {
           focusRef.current = locationToAngles(35.676, 139.65)
         }}>📍 Tokyo</button>
