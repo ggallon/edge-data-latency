@@ -8,6 +8,7 @@ import {
 import { Chart } from "@/components/chart"
 import { Checkbox } from "@/components/checkbox"
 import { Code } from "@/components/code"
+import { Globe } from "@/components/globe"
 import { ConvexIcon, FaunaIcon, GrafbaseIcon, MongoIcon, PlanetScaleIcon, UpstashIcon, XataIcon } from "@/components/icons"
 import { dataFormatter } from "@/utils/data-formatter";
 
@@ -230,6 +231,10 @@ export default function Page() {
             Run Test
           </Button>
         </div>
+        </form>
+        <div className="w-64 h-64 mb-12">
+          <Globe />
+        </div>
 
         {data.serverless.length || data.regional.length || data.global.length ? (
           <ColGrid numCols={1} numColsMd={2} gapX="gap-x-5" gapY="gap-y-5">
@@ -256,7 +261,7 @@ export default function Page() {
             </Chart>
           </ColGrid>
         ) : null}
-      </form>
+      
     </main>
   );
 }
