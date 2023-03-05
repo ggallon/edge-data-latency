@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@heroicons/react': 2.0.16
+  '@neondatabase/serverless': ^0.2.6
   '@planetscale/database': 1.5.0
   '@radix-ui/react-checkbox': 1.0.2
   '@supabase/supabase-js': 2.10.0
@@ -27,9 +28,11 @@ specifiers:
   react-wrap-balancer: 0.4.0
   tailwindcss: 3.2.7
   typescript: 4.9.5
+  ws: ^8.12.1
 
 dependencies:
   '@heroicons/react': 2.0.16_react@18.2.0
+  '@neondatabase/serverless': 0.2.6
   '@planetscale/database': 1.5.0
   '@radix-ui/react-checkbox': 1.0.2_biqbaboplfbrettd7655fr4n2y
   '@supabase/supabase-js': 2.10.0
@@ -46,6 +49,7 @@ dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-wrap-balancer: 0.4.0_react@18.2.0
+  ws: 8.12.1
 
 devDependencies:
   '@tailwindcss/forms': 0.5.3_tailwindcss@3.2.7
@@ -146,6 +150,10 @@ packages:
   /@humanwhocodes/object-schema/1.2.1:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
+
+  /@neondatabase/serverless/0.2.6:
+    resolution: {integrity: sha512-ogdFzxZAowsFZrjLEB0RqczKulD2A3A2k/9M1wGhmRUhXxuIS53WcEYGme2OLR7V+bAQ67s0K0DNkT7AYhFrgA==}
+    dev: false
 
   /@next/env/13.2.3:
     resolution: {integrity: sha512-FN50r/E+b8wuqyRjmGaqvqNDuWBWYWQiigfZ50KnSFH0f+AMQQyaZl+Zm2+CIpKk0fL9QxhLxOpTVA3xFHgFow==}
@@ -3544,6 +3552,19 @@ packages:
   /wrappy/1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
     dev: true
+
+  /ws/8.12.1:
+    resolution: {integrity: sha512-1qo+M9Ba+xNhPB+YTWUlK6M17brTut5EXbcBaMRN5pH5dFrXz7lzz1ChFSUq3bOUl8yEvSenhHmYUNJxFzdJew==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: '>=5.0.2'
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+    dev: false
 
   /xtend/4.0.2:
     resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}

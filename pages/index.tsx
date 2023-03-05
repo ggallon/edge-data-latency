@@ -9,7 +9,6 @@ import { Chart } from "@/components/chart"
 import { Checkbox } from "@/components/checkbox"
 import { Code } from "@/components/code"
 import { ConvexIcon, FaunaIcon, GrafbaseIcon, MongoIcon, PlanetScaleIcon, UpstashIcon, XataIcon } from "@/components/icons"
-import { dataFormatter } from "@/utils/data-formatter";
 
 const ATTEMPTS = 10;
 
@@ -132,8 +131,13 @@ export default function Page() {
                 icon={BoltIcon}
               />
               <DropdownItem
+                value="neon"
+                text="Neon (Kysely + neondatabase-js)"
+                icon={XataIcon}
+              />
+              <DropdownItem
                 value="fauna"
-                text="Fauna (faunadb.js)"
+                text="Fauna (GraphQL API)"
                 icon={FaunaIcon}
               />
               <DropdownItem

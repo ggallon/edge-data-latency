@@ -1,0 +1,8 @@
+create table employees (
+  emp_no uuid default uuid_generate_v4 (),
+  first_name TEXT NOT NULL,
+  last_name TEXT NOT NULL,
+  inserted_at timestamp DEFAULT now(),
+  updated_at timestamp DEFAULT now(),
+  PRIMARY KEY (emp_no)
+)

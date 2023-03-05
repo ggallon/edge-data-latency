@@ -1,6 +1,6 @@
-import { Kysely } from "kysely";
-import { PlanetScaleDialect } from "kysely-planetscale";
-import { NextRequest as Request, NextResponse as Response } from "next/server";
+import { Pool } from '@neondatabase/serverless';
+import { Kysely, PostgresDialect } from 'kysely';
+import { NextRequest as Request, NextResponse as Response, NextFetchEvent } from "next/server";
 import { findRegion } from "@/utils/find-region";
 import { toNumber } from "@/utils/to-number";
 import type { Database } from "@/types/database"
@@ -9,21 +9,21 @@ export const config = {
   runtime: "edge",
 };
 
-const db = new Kysely<Database>({
-  dialect: new PlanetScaleDialect({
-    host: process.env.PSCALE_DB_HOST,
-    username: process.env.PSCALE_DB_USERNAME,
-    password: process.env.PSCALE_DB_PASSWORD,
-  }),
-});
-
 const start = Date.now();
 let coldStart = true;
 
-export default async function api(req: Request) {
+export default async function api(req: Request, event: NextFetchEvent) {
   const time = Date.now();
   const now = coldStart
   coldStart = false;
+
+  const pool = new Pool({
+    connectionString: process.env.NEON_BD_URL
+  });
+
+  const db = new Kysely<Database>({
+    dialect: new PostgresDialect({ pool })
+  });
 
   const count = toNumber(new URL(req.url).searchParams.get("count"));
   
@@ -35,6 +35,8 @@ export default async function api(req: Request) {
       .limit(10)
       .execute();
   }
+
+  event.waitUntil(pool.end());
 
   return Response.json(
     {
