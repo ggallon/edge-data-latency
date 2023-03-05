@@ -151,13 +151,6 @@ export default function Page() {
               onValueChange={(v) => setDataService(v)}
               maxWidth="max-w-xs"
             >
-              {/*
-              <DropdownItem
-                value="grafbase"
-                text="Grafbase (GraphQL)"
-                icon={GrafbaseIcon}
-              />
-              */}
               <DropdownItem
                 value="planetscale"
                 text="PlanetScale (Kysely + database-js)"
@@ -174,19 +167,24 @@ export default function Page() {
                 icon={BoltIcon}
               />
               <DropdownItem
+                value="upstash"
+                text="Upstash (SDK)"
+                icon={UpstashIcon}
+              />
+              <DropdownItem
                 value="neon"
                 text="Neon (Kysely + neondatabase-js)"
                 icon={XataIcon}
               />
               <DropdownItem
+                value="grafbase"
+                text="Grafbase (GraphQL)"
+                icon={GrafbaseIcon}
+              />
+              <DropdownItem
                 value="fauna"
                 text="Fauna (GraphQL API)"
                 icon={FaunaIcon}
-              />
-              <DropdownItem
-                value="upstash"
-                text="Upstash (SDK)"
-                icon={UpstashIcon}
               />
               <DropdownItem
                 value="convex"

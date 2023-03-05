@@ -1,5 +1,13 @@
 [
   {
+    "name": "GrafBase",
+    "database": "",
+    "regionID": "EU-CENTRAL-1",
+    "regionName": "Frankfurt",
+    "subProviderName": "AWS",
+    "subProviderRegionId": "eu-central-1"
+  },
+  {
     "name": "Upstash",
     "database": "redis",
     "regionID": "US-EAST-1",
