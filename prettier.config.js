@@ -11,6 +11,7 @@ module.exports = {
     "<THIRD_PARTY_MODULES>",
     "^@/(.*)$",
     "^[./]",
+    "@tremor/react/dist/esm/tremor.css"
   ],
   importOrderSeparation: false,
   importOrderSortSpecifiers: true,
