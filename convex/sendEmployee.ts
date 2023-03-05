@@ -1,6 +1,6 @@
-import { mutation } from "./_generated/server";
+import { mutation } from "./_generated/server"
 
 export default mutation(async ({ db }, body) => {
-  const employee = { ...body };
-  db.insert("employees", employee);
-});
+  const employee = { ...body }
+  db.insert("employees", employee)
+})

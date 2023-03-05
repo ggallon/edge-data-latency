@@ -1,29 +1,27 @@
-import { NextRequest as Request, NextResponse as Response } from "next/server";
-import { findRegion } from "@/utils/find-region";
-import { toNumber } from "@/utils/to-number";
+import { NextRequest as Request, NextResponse as Response } from "next/server"
+import { findRegion } from "@/utils/find-region"
+import { toNumber } from "@/utils/to-number"
 
 export const config = {
   runtime: "edge",
-};
+}
 
-const start = Date.now();
+const start = Date.now()
 
 export default async function api(req: Request) {
-  const count = toNumber(new URL(req.url).searchParams.get("count"));
-  const time = Date.now();
+  const count = toNumber(new URL(req.url).searchParams.get("count"))
+  const time = Date.now()
 
-  let data = null;
+  let data = null
   for (let i = 0; i < count; i++) {
-    data = await fetch(
-      process.env.FAUNA_API_URL,
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          "authorization": `Bearer ${process.env.FAUNA_API_KEY}`,
-        },
-        body: JSON.stringify({
-          query: `{
+    data = await fetch(process.env.FAUNA_API_URL, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${process.env.FAUNA_API_KEY}`,
+      },
+      body: JSON.stringify({
+        query: `{
             listEmployees(_size: 10) {
               data {
                 emp_no: _id
@@ -34,9 +32,8 @@ export default async function api(req: Request) {
               }
             }
           }`,
-        }),
-      }
-    ).then((res) => res.json());
+      }),
+    }).then((res) => res.json())
   }
 
   return Response.json(
@@ -44,12 +41,12 @@ export default async function api(req: Request) {
       data,
       queryDuration: Date.now() - time,
       invocationIsCold: start === time,
-      invocationRegion: findRegion(req.headers.get("x-vercel-id") ?? "")
+      invocationRegion: findRegion(req.headers.get("x-vercel-id") ?? ""),
     },
     {
       headers: {
         "x-edge-is-cold": start === time ? "1" : "0",
       },
     }
-  );
+  )
 }

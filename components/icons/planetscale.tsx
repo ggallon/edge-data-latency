@@ -11,4 +11,3 @@ export function PlanetScaleIcon(props) {
     </svg>
   )
 }
-

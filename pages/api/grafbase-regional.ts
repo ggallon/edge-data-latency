@@ -1,6 +1,6 @@
 export const config = {
   runtime: "edge",
   regions: ["iad1"],
-};
+}
 
-export { default } from "./grafbase-global";
+export { default } from "./grafbase-global"
