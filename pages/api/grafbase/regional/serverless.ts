@@ -15,7 +15,7 @@ export default async function api(req: Request, res: Response) {
   const countNumber = toNumber(count) ?? 0
 
   let data = null
-  for (let i = 0; i < count; i++) {
+  for (let i = 0; i < countNumber; i++) {
     data = await fetch(process.env.GRAFBASE_BD_URL, {
       method: "POST",
       headers: {
