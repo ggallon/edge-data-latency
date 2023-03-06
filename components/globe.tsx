@@ -14,7 +14,7 @@ let currentPhi = 0
 let currentTheta = 0
 
 const MARKERS_LIST = [
-  { location: [37.78, -122.412], size: 0.3 },
+  { location: [37.78, -122.412], size: 0.1 },
   { location: [44.8412, -0.5806], size: 0.1 },
   { location: [35.676, 139.65], size: 0.1 },
   { location: [-34.6, -58.38], size: 0.1 },
@@ -25,6 +25,7 @@ export function Globe() {
   const globeRef = useRef(null)
   const pointerInteractingRef = useRef(null)
   const focusRef = useRef([0, 0])
+  const pixelRatio = 2
 
   const locationToAngles = (lat: number, long: number): number[] => {
     return [PI - ((long * PI) / 180 - PI / 2), (lat * PI) / 180]
@@ -41,13 +42,13 @@ export function Globe() {
     onResize()
 
     const globe = createGlobe(canvasRef.current, {
-      devicePixelRatio: 2,
-      width: width * 2,
-      height: width * 2,
+      devicePixelRatio: pixelRatio,
+      width: width * pixelRatio,
+      height: width * pixelRatio,
       phi: 0,
       theta: 0.3,
       dark: 0,
-      diffuse: 3,
+      diffuse: 2,
       mapSamples: 16000,
       mapBrightness: 1.2,
       baseColor: [1, 1, 1],
@@ -67,8 +68,8 @@ export function Globe() {
           currentPhi -= distNegative * 0.09
         }
         currentTheta = currentTheta * 0.92 + focusTheta * 0.08
-        state.width = width * 2
-        state.height = width * 2
+        state.width = width * pixelRatio
+        state.height = width * pixelRatio
       },
     })
 
