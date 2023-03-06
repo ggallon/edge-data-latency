@@ -18,12 +18,28 @@ import {
   FaunaIcon,
   GrafbaseIcon,
   MongoIcon,
+  NeonIcon,
   PlanetScaleIcon,
   UpstashIcon,
   XataIcon,
 } from "@/components/icons"
 
 const ATTEMPTS = 10
+
+const DROPDOWN_ITEMS = [
+  {
+    value: "planetscale",
+    text: "PlanetScale (Kysely + database-js)",
+    icon: PlanetScaleIcon,
+  },
+  { value: "mongo", text: "MongoDB (Data API))", icon: MongoIcon },
+  { value: "supabase", text: "Supabase (supabase-js)", icon: BoltIcon },
+  { value: "upstash", text: "Upstash (SDK)", icon: UpstashIcon },
+  { value: "neon", text: "Neon (Kysely + neondatabase-js)", icon: NeonIcon },
+  { value: "grafbase", text: "Grafbase (GraphQL)", icon: GrafbaseIcon },
+  { value: "fauna", text: "Fauna (GraphQL API)", icon: FaunaIcon },
+  { value: "convex", text: "Convex (SDK)", icon: ConvexIcon },
+]
 
 type Region = "global" | "regional" | "fra1"
 type Type = "edge" | "serverless"
@@ -151,47 +167,14 @@ export default function Page() {
               onValueChange={(v) => setDataService(v)}
               maxWidth="max-w-xs"
             >
-              <DropdownItem
-                value="planetscale"
-                text="PlanetScale (Kysely + database-js)"
-                icon={PlanetScaleIcon}
-              />
-              <DropdownItem
-                value="mongo"
-                text="MongoDB (Data API)"
-                icon={MongoIcon}
-              />
-              <DropdownItem
-                value="supabase"
-                text="Supabase (supabase-js)"
-                icon={BoltIcon}
-              />
-              <DropdownItem
-                value="upstash"
-                text="Upstash (SDK)"
-                icon={UpstashIcon}
-              />
-              <DropdownItem
-                value="neon"
-                text="Neon (Kysely + neondatabase-js)"
-                icon={XataIcon}
-              />
-              <DropdownItem
-                value="grafbase"
-                text="Grafbase (GraphQL)"
-                icon={GrafbaseIcon}
-              />
-              <DropdownItem
-                value="fauna"
-                text="Fauna (GraphQL API)"
-                icon={FaunaIcon}
-              />
-              <DropdownItem
-                value="convex"
-                text="Convex (SDK)"
-                icon={ConvexIcon}
-              />
-              <DropdownItem value="xata" text="Xata (SDK)" icon={XataIcon} />
+              {DROPDOWN_ITEMS.map((item) => (
+                <DropdownItem
+                  key={item.value}
+                  value={item.value}
+                  text={item.text}
+                  icon={item.icon}
+                />
+              ))}
             </Dropdown>
           </div>
         </div>
