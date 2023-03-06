@@ -16,6 +16,7 @@ import { Code } from "@/components/code"
 import {
   ConvexIcon,
   FaunaIcon,
+  FirestoreIcon,
   GrafbaseIcon,
   MongoIcon,
   NeonIcon,
@@ -36,9 +37,10 @@ const DROPDOWN_ITEMS = [
   { value: "supabase", text: "Supabase (supabase-js)", icon: BoltIcon },
   { value: "upstash", text: "Upstash (SDK)", icon: UpstashIcon },
   { value: "neon", text: "Neon (Kysely + neondatabase-js)", icon: NeonIcon },
-  { value: "grafbase", text: "Grafbase (GraphQL)", icon: GrafbaseIcon },
+  { value: "grafbase", text: "Grafbase (GraphQL API)", icon: GrafbaseIcon },
   { value: "fauna", text: "Fauna (GraphQL API)", icon: FaunaIcon },
   { value: "convex", text: "Convex (SDK)", icon: ConvexIcon },
+  { value: "firestore", text: "Firestore (REST API)", icon: FirestoreIcon },
 ]
 
 type Region = "global" | "regional" | "fra1"
@@ -56,6 +58,8 @@ export default function Page() {
     regional: [],
     global: [],
   })
+  const hasData =
+    data.serverless.length || data.regional.length || data.global.length
 
   const runTest = useCallback(
     async (
@@ -264,9 +268,7 @@ export default function Page() {
           </Button>
         </div>
 
-        {data.serverless.length ||
-        data.regional.length ||
-        data.global.length ? (
+        {hasData ? (
           <ColGrid numCols={1} numColsMd={2} gapX="gap-x-5" gapY="gap-y-5">
             <Chart
               title="Latency distribution (processing time)"
