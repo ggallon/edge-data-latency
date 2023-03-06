@@ -1,7 +1,7 @@
-export function Code({ className = '', children }) {
+export function Code({ className = "", children }) {
   return (
-    <code className={`bg-gray-200 text-sm p-1 rounded ${className}`}>
+    <code className={`rounded bg-gray-200 p-1 text-sm ${className}`}>
       {children}
     </code>
-  );
+  )
 }

@@ -1,0 +1,4 @@
+type Employee @model {
+  firstName: String!
+  lastName: String!
+}

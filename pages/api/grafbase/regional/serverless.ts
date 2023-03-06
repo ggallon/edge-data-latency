@@ -16,24 +16,26 @@ export default async function api(req: Request, res: Response) {
 
   let data = null
   for (let i = 0; i < countNumber; i++) {
-    data = await fetch(process.env.FAUNA_API_URL, {
+    data = await fetch(process.env.GRAFBASE_BD_URL, {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        authorization: `Bearer ${process.env.FAUNA_API_KEY}`,
+        "x-api-key": process.env.GRAFBASE_API_KEY,
       },
       body: JSON.stringify({
         query: `{
-            listEmployees(_size: 10) {
-              data {
-                emp_no: _id
-                first_name
-                last_name
-                inserted_at: _ts
-                update_at: _ts
+          employeeCollection(first: 10) {
+            edges {
+              node {
+                id
+                firstName
+                lastName
+                createdAt
+                updatedAt
               }
             }
-          }`,
+          }
+        }`,
       }),
     }).then((res) => res.json())
   }

@@ -1,5 +1,4 @@
 import { NextRequest as Request, NextResponse as Response } from "next/server"
-import { Redis } from "@upstash/redis"
 import { findRegion } from "@/utils/find-region"
 import { toNumber } from "@/utils/to-number"
 
@@ -7,7 +6,6 @@ export const config = {
   runtime: "edge",
 }
 
-const redis = Redis.fromEnv()
 const start = Date.now()
 
 export default async function api(req: Request) {
@@ -16,8 +14,30 @@ export default async function api(req: Request) {
 
   let data = null
   for (let i = 0; i < count; i++) {
-    data = await redis.json.get("employees", "$[*]")
+    data = await fetch(process.env.GRAFBASE_BD_URL, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "x-api-key": process.env.GRAFBASE_API_KEY,
+      },
+      body: JSON.stringify({
+        query: `{
+          employeeCollection(first: 10) {
+            edges {
+              node {
+                id
+                firstName
+                lastName
+                createdAt
+                updatedAt
+              }
+            }
+          }
+        }`,
+      }),
+    }).then((res) => res.json())
   }
+
   return Response.json(
     {
       data,

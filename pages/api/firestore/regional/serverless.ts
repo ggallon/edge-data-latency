@@ -16,26 +16,15 @@ export default async function api(req: Request, res: Response) {
 
   let data = null
   for (let i = 0; i < countNumber; i++) {
-    data = await fetch(process.env.FAUNA_API_URL, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${process.env.FAUNA_API_KEY}`,
-      },
-      body: JSON.stringify({
-        query: `{
-            listEmployees(_size: 10) {
-              data {
-                emp_no: _id
-                first_name
-                last_name
-                inserted_at: _ts
-                update_at: _ts
-              }
-            }
-          }`,
-      }),
-    }).then((res) => res.json())
+    data = await fetch(
+      `${process.env.FIRESTORE_BD_URL}/employees?pageSize=10`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    ).then((res) => res.json())
   }
 
   res.setHeader("x-serverless-is-cold", isCold ? "1" : "0")

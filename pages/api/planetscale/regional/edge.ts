@@ -1,6 +1,6 @@
 export const config = {
   runtime: "edge",
   regions: ["fra1"],
-};
+}
 
-export { default } from "../global";
+export { default } from "../global"

@@ -1,0 +1,5 @@
+.next
+.xatarc
+convex/_generated
+pnpm-lock.yaml
+xata/xata.ts

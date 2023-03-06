@@ -1,5 +1,4 @@
 import { NextRequest as Request, NextResponse as Response } from "next/server"
-import { Redis } from "@upstash/redis"
 import { findRegion } from "@/utils/find-region"
 import { toNumber } from "@/utils/to-number"
 
@@ -7,7 +6,6 @@ export const config = {
   runtime: "edge",
 }
 
-const redis = Redis.fromEnv()
 const start = Date.now()
 
 export default async function api(req: Request) {
@@ -16,8 +14,17 @@ export default async function api(req: Request) {
 
   let data = null
   for (let i = 0; i < count; i++) {
-    data = await redis.json.get("employees", "$[*]")
+    data = await fetch(
+      `${process.env.FIRESTORE_BD_URL}/employees?pageSize=10`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    ).then((res) => res.json())
   }
+
   return Response.json(
     {
       data,

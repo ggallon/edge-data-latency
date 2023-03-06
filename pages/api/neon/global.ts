@@ -1,30 +1,46 @@
-import { NextRequest as Request, NextResponse as Response } from "next/server"
+import {
+  NextFetchEvent,
+  NextRequest as Request,
+  NextResponse as Response,
+} from "next/server"
+import type { Database } from "@/types/database"
+import { Pool } from "@neondatabase/serverless"
+import { Kysely, PostgresDialect } from "kysely"
 import { findRegion } from "@/utils/find-region"
 import { toNumber } from "@/utils/to-number"
-import { getXataClient } from "@/xata/xata"
 
 export const config = {
   runtime: "edge",
 }
 
-const xata = getXataClient()
-
 const start = Date.now()
 let coldStart = true
 
-export default async function api(req: Request) {
+export default async function api(req: Request, event: NextFetchEvent) {
   const time = Date.now()
   const now = coldStart
   coldStart = false
+
+  const pool = new Pool({
+    connectionString: process.env.NEON_BD_URL,
+  })
+
+  const db = new Kysely<Database>({
+    dialect: new PostgresDialect({ pool }),
+  })
 
   const count = toNumber(new URL(req.url).searchParams.get("count"))
 
   let data = null
   for (let i = 0; i < count; i++) {
-    data = await xata.db.employees
+    data = await db
+      .selectFrom("employees")
       .select(["emp_no", "first_name", "last_name"])
-      .getMany({ pagination: { size: 10 }, consistency: "eventual" })
+      .limit(10)
+      .execute()
   }
+
+  event.waitUntil(pool.end())
 
   return Response.json(
     {
