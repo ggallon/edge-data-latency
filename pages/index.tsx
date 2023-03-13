@@ -3,7 +3,7 @@ import { BoltIcon } from "@heroicons/react/20/solid"
 import {
   Badge,
   Button,
-  ColGrid,
+  Grid,
   Dropdown,
   DropdownItem,
   Text,
@@ -169,7 +169,7 @@ export default function Page() {
             <Dropdown
               defaultValue={dataService}
               onValueChange={(v) => setDataService(v)}
-              maxWidth="max-w-xs"
+              className="max-w-xs"
             >
               {DROPDOWN_ITEMS.map((item) => (
                 <DropdownItem
@@ -269,7 +269,7 @@ export default function Page() {
         </div>
 
         {hasData ? (
-          <ColGrid numCols={1} numColsMd={2} gapX="gap-x-5" gapY="gap-y-5">
+          <Grid numCols={1} numColsMd={2} className="gap-x-5 gap-y-5">
             <Chart
               title="Latency distribution (processing time)"
               attempts={ATTEMPTS}
@@ -291,7 +291,7 @@ export default function Page() {
               serverless. Your internet connection and location <b>will</b>{" "}
               influence these results.
             </Chart>
-          </ColGrid>
+          </Grid>
         ) : null}
       </form>
     </main>

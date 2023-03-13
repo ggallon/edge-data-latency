@@ -17,8 +17,8 @@ interface ChartProps {
 export function Chart({ title, data, param, attempts, children }: ChartProps) {
   return (
     <Card>
-      <Title truncate={true}>{title}</Title>
-      <Text height="h-14">{children}</Text>
+      <Title className="truncate">{title}</Title>
+      <Text className="h-14">{children}</Text>
       <AreaChart
         data={new Array(attempts).fill(0).map((_, i) => {
           return {
@@ -28,12 +28,12 @@ export function Chart({ title, data, param, attempts, children }: ChartProps) {
             Global: data.global[i] ? data.global[i][param] : null,
           }
         })}
-        dataKey="attempt"
+        index="attempt"
         categories={["Global", "Regional", "Serverless"]}
         colors={["indigo", "cyan", "yellow"]}
         valueFormatter={dataFormatter}
-        marginTop="mt-6"
-        yAxisWidth="w-12"
+        className="mt-6"
+        yAxisWidth={48}
       />
     </Card>
   )
