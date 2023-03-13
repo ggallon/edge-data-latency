@@ -146,7 +146,7 @@ export default function Page() {
         <Title>
           Client &lt;--&gt; (Edge | Serverless) &lt;--&gt; Data latency
         </Title>
-        <Badge text="BETA" size="xs" color="red" />
+        <Badge size="xs" color="red">BETA</Badge>
       </div>
       <Text>
         <Balancer ratio={0.5}>
