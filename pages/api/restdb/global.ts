@@ -14,16 +14,13 @@ export default async function api(req: Request) {
 
   let data = null
   for (let i = 0; i < count; i++) {
-    data = await fetch(
-      `${process.env.RESTDB_BD_URL}/rest/employees?max=10`,
-      {
-        method: "GET",
-        headers: {
-          "cache-control': 'no-cache",
-          "x-apikey": process.env.RESTDB_API_KEY,
-        },
-      }
-    ).then((res) => res.json())
+    data = await fetch(`${process.env.RESTDB_BD_URL}/rest/employees?max=10`, {
+      method: "GET",
+      headers: {
+        "cache-control": "no-cache",
+        "x-apikey": process.env.RESTDB_API_KEY,
+      },
+    }).then((res) => res.json())
   }
 
   return Response.json(
