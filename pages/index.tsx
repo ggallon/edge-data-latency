@@ -33,7 +33,7 @@ const DROPDOWN_ITEMS = [
     text: "PlanetScale (Kysely + database-js)",
     icon: PlanetScaleIcon,
   },
-  { value: "mongo", text: "MongoDB (Data API))", icon: MongoIcon },
+  { value: "mongo", text: "MongoDB (Data API)", icon: MongoIcon },
   { value: "supabase", text: "Supabase (supabase-js)", icon: BoltIcon },
   { value: "upstash", text: "Upstash (SDK)", icon: UpstashIcon },
   { value: "neon", text: "Neon (Kysely + neondatabase-js)", icon: NeonIcon },
