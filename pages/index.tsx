@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react"
 import { BoltIcon } from "@heroicons/react/20/solid"
 import {
-  Badge,
   Button,
   Dropdown,
   DropdownItem,
@@ -146,7 +145,6 @@ export default function Page() {
         <Title>
           Client &lt;--&gt; (Edge | Serverless) &lt;--&gt; Data latency
         </Title>
-        <Badge size="xs" color="red">BETA</Badge>
       </div>
       <Text>
         <Balancer ratio={0.5}>

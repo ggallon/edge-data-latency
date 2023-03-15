@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --globalnav-height: 44px;
+  --light-color: rgba(255, 255, 255, 0.8);
+  --bg-gray-color: rgba(22, 22, 23, 0.8);
+}
+
 body {
   @apply bg-slate-50;
+}
+
+.globalnav-color {
+  color: var(--light-color);
+  background-color: var(--bg-gray-color);
+}
+
+.px-safe-area {
+  padding-left: max(22px, env(safe-area-inset-left));
+  padding-right: max(22px, env(safe-area-inset-right));
 }

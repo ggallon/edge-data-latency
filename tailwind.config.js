@@ -1,6 +1,28 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 const flattenColorPalette = require("tailwindcss/lib/util/flattenColorPalette").default;
 
+const plugin = require("tailwindcss/plugin")
+
+const iOsHeight = plugin(function ({ addUtilities }) {
+  const supportsTouchRule = "@supports (-webkit-touch-callout: none)"
+  const webkitFillAvailable = "-webkit-fill-available"
+
+  const utilities = {
+    ".min-h-screen-ios": {
+      [supportsTouchRule]: {
+        minHeight: webkitFillAvailable,
+      },
+    },
+    ".h-screen-ios": {
+      [supportsTouchRule]: {
+        height: webkitFillAvailable,
+      },
+    },
+  }
+
+  addUtilities(utilities, ["responsive"])
+})
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -13,7 +35,8 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/forms'),
-    addVariablesForColors
+    addVariablesForColors,
+    iOsHeight
   ],
 };
 
