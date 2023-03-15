@@ -1,3 +1,4 @@
+export { AppwriteIcon } from "./appwrite"
 export { ConvexIcon } from "./convex"
 export { FaunaIcon } from "./fauna"
 export { FirestoreIcon } from "./firestore"

@@ -13,6 +13,7 @@ import { Chart } from "@/components/chart"
 import { Checkbox } from "@/components/checkbox"
 import { Code } from "@/components/code"
 import {
+  AppwriteIcon,
   ConvexIcon,
   FaunaIcon,
   FirestoreIcon,
@@ -40,6 +41,7 @@ const DROPDOWN_ITEMS = [
   { value: "fauna", text: "Fauna (GraphQL API)", icon: FaunaIcon },
   { value: "convex", text: "Convex (SDK)", icon: ConvexIcon },
   { value: "firestore", text: "Firestore (REST API)", icon: FirestoreIcon },
+  { value: "appwrite", text: "appwrite (REST API)", icon: AppwriteIcon },
 ]
 
 type Region = "global" | "regional" | "fra1"
