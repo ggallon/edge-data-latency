@@ -18,4 +18,4 @@ export const regions: Record<string, string> = {
   fra1: "Frankfurt",
   cpt1: "Cape Town",
   dev1: "localhost",
-};
+}

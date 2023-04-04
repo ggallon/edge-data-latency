@@ -3,7 +3,7 @@ import { GitHubLogo } from "@/components/icons/github"
 export function Footer() {
   return (
     <footer className="w-full bg-[#f5f5f7]">
-      <div className="px-safe-area mx-auto w-full max-w-5xl py-4 px-6 md:flex md:items-center md:justify-between md:py-6 lg:px-8">
+      <div className="px-safe-area mx-auto w-full max-w-5xl px-6 py-4 md:flex md:items-center md:justify-between md:py-6 lg:px-8">
         <div className="flex justify-center space-x-6 md:order-2">
           <a
             key="GitHub"
